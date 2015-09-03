@@ -139,7 +139,7 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
         // update UI
         // By the time we get here, the idx has already been updated!!
         self.photoView.flashEnd();
-        self.photoView.updatePhotoSet(data.web_url, self.appState.current_frame_idx, function() {
+        self.photoView.updatePhotoSet(data[0].web_url, self.appState.current_frame_idx, function() {
           setTimeout(function() {
             self.fsm.photo_updated();
           }, self.config.between_snap_delay)
