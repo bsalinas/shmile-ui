@@ -37,7 +37,10 @@ SocketLayer.prototype.register = function(fsm) {
     console.log('connected evt');
     self.fsm.connected();
   });
-
+  this.proxy.on('brew_started', function() {
+    console.log('brew_started evt');
+    self.fsm.brew_started();
+  });
   this.proxy.on('camera_snapped', function() {
     console.log('camera_snapped evt');
     //fsm.camera_snapped();

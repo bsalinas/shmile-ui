@@ -109,7 +109,8 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
     initial: 'loading',
     events: [
       { name: 'connected', from: 'loading', to: 'ready' },
-      { name: 'ui_button_pressed', from: 'ready', to: 'waiting_for_photo' },
+      { name: 'ui_button_pressed', from: 'ready', to: 'waiting_for_brewing' },
+      { name: 'brew_started', from:'waiting_for_brewing', to:'waiting_for_photo'},
       { name: 'photo_saved', from: 'waiting_for_photo', to: 'review_photo' },
       { name: 'photo_updated', from: 'review_photo', to: 'next_photo' },
       { name: 'continue_partial_set', from: 'next_photo', to: 'waiting_for_photo' },
@@ -127,7 +128,15 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       },
       onleaveready: function() {
       },
+      onenterwaiting_for_brewing: function(){
+        $('#brew-notification').show();
+        self.socket.emit('primed', true);
+      },
+      oneleavewaiting_for_brewing: function(){
+        
+      },
       onenterwaiting_for_photo: function(e) {
+        $('#brew-notification').hide();
         cheeseCb = function() {
           self.photoView.modalMessage('Cheese!', self.config.cheese_delay);
           self.photoView.flashStart();
@@ -252,14 +261,19 @@ SocketLayer.prototype.register = function(fsm) {
     console.log('connected evt');
     self.fsm.connected();
   });
-
+  this.proxy.on('brew_started', function() {
+    console.log('brew_started evt');
+    self.fsm.brew_started();
+  });
   this.proxy.on('camera_snapped', function() {
     console.log('camera_snapped evt');
     //fsm.camera_snapped();
   })
 
   this.proxy.on('photo_saved', function(data) {
-    console.log('photo_saved evt: ' + data.filename);
+    for(item in data){
+      console.log('photo_saved evt: ' + item.filename);
+    }
     self.fsm.photo_saved(data);
   });
 }

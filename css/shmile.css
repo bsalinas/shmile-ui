@@ -57,3 +57,10 @@ button#start-button {
 }
 .boinkyellow.awesome, .boinkyellow.awesome:visited        { background-color: #F5BE1B; }
 .boinkyellow.awesome:hover                           { background-color: #fc9200; }
+
+#brew-notification{
+    position:absolute;
+    top:30%;
+    left:50%;
+    background-color:red;
+}
