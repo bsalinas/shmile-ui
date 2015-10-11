@@ -55,11 +55,13 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       onenterwaiting_for_brewing: function(){
         $('#brew-notification').show();
         self.socket.emit('primed', true);
+        console.log("on enter waiting for brewing");
       },
-      oneleavewaiting_for_brewing: function(){
-        
+      onleavewaiting_for_brewing: function(){
+        console.log("on leave waiting for brewing");
       },
       onenterwaiting_for_photo: function(e) {
+        console.log("on enter waiting for photo");
         $('#brew-notification').hide();
         cheeseCb = function() {
           self.photoView.modalMessage('Cheese!', self.config.cheese_delay);
