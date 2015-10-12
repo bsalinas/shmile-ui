@@ -114,7 +114,8 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       { name: 'photo_saved', from: 'waiting_for_photo', to: 'review_photo' },
       { name: 'photo_updated', from: 'review_photo', to: 'next_photo' },
       { name: 'continue_partial_set', from: 'next_photo', to: 'waiting_for_photo' },
-      { name: 'finish_set', from: 'next_photo', to: 'review_composited' },
+      { name: 'finish_set', from: 'next_photo', to: 'wait_for_brewing_stop'},
+      { name: 'brew_stopped', from: 'wait_for_brewing_stop', to: 'review_composited'},
       { name: 'next_set', from: 'review_composited', to: 'ready'}
     ],
     callbacks: {
@@ -129,6 +130,7 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       onleaveready: function() {
       },
       onenterwaiting_for_brewing: function(){
+        $('#brew-notification').text("Start Brewing on Group 1");
         $('#brew-notification').show();
         self.socket.emit('primed', true);
         console.log("on enter waiting for brewing");
@@ -167,6 +169,16 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
           self.appState.current_frame_idx = (self.appState.current_frame_idx + 1) % 4
           self.fsm.continue_partial_set();
         }
+      },
+      oneneterwait_for_brewing_stop: function(e,f,t)
+      {
+        self.socket.emit('photos_complete');
+        $('#brew-notification').text("Waiting for Brewing to Finish");
+        $('#brew-notification').show();
+      },
+      onleavewait_for_brewing_stop: function(e,f,t)
+      {
+        $('#brew-notification').hide();
       },
       onenterreview_composited: function(e, f, t) {
         self.socket.emit('composite');
