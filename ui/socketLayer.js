@@ -45,8 +45,8 @@ SocketLayer.prototype.register = function(fsm) {
     console.log('camera_snapped evt');
     //fsm.camera_snapped();
   })
-  this.proxy.on('brew_started', function() {
-    console.log('brew_started evt');
+  this.proxy.on('brew_stopped', function() {
+    console.log('brew_stopped evt');
     self.fsm.brew_stopped();
   });
 
