@@ -96,15 +96,19 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       },
       onenterwait_for_brewing_stop: function(e,f,t)
       {
+        console.log("onenterwait_for_brewing_stop");
         self.socket.emit('photos_complete');
         $('#brew-notification').text("Waiting for Brewing to Finish");
         $('#brew-notification').show();
       },
       onleavewait_for_brewing_stop: function(e,f,t)
       {
+        console.log("onleavewait_for_brewing_stop");
         $('#brew-notification').hide();
       },
       onenterreview_composited: function(e, f, t) {
+        console.log("onenterreview_composited");
+
         self.socket.emit('composite');
         self.photoView.showOverlay(true);
         setTimeout(function() {
@@ -112,6 +116,7 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
         }, self.config.next_delay);
       },
       onleavereview_composited: function(e, f, t) {
+        console.log("onleavereview_composited");
         // Clean up
         self.photoView.animate('out');
         self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
