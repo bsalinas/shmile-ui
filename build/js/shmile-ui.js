@@ -288,6 +288,10 @@ SocketLayer.prototype.register = function(fsm) {
     console.log('camera_snapped evt');
     //fsm.camera_snapped();
   })
+  this.proxy.on('brew_started', function() {
+    console.log('brew_started evt');
+    self.fsm.brew_stopped();
+  });
 
   this.proxy.on('photo_saved', function(data) {
     for(item in data){
