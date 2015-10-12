@@ -170,7 +170,7 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
           self.fsm.continue_partial_set();
         }
       },
-      oneneterwait_for_brewing_stop: function(e,f,t)
+      onenterwait_for_brewing_stop: function(e,f,t)
       {
         self.socket.emit('photos_complete');
         $('#brew-notification').text("Waiting for Brewing to Finish");
