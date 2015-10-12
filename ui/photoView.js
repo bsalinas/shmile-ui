@@ -81,14 +81,14 @@ var PhotoView = Backbone.View.extend({
     this.all.push(img);
 
     // Draw the PNG logo overlay.
-    var o = this.canvas.image(
-        '/images/overlay.png',
-        this.compositeOrigin.x,
-        this.compositeOrigin.y,
-        this.compositeDim.w,
-        this.compositeDim.h);
-    this.all.push(o);
-    this.overlayImage = o;
+    // var o = this.canvas.image(
+    //     '/images/overlay.png',
+    //     this.compositeOrigin.x,
+    //     this.compositeOrigin.y,
+    //     this.compositeDim.w,
+    //     this.compositeDim.h);
+    // this.all.push(o);
+    // this.overlayImage = o;
 
     // Hide everything and move out of sight.
     this.all.hide();
