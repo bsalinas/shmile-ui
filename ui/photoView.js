@@ -138,7 +138,7 @@ var PhotoView = Backbone.View.extend({
     if (dir === 'in') {
       this.all.show();
       this.images.hide();
-      this.overlayImage.hide();
+      if(this.overlayImage) this.overlayImage.hide();
       this.all.animate({
         'translation': this.config.window_width+",0"
       }, 1000, "<>", cb);

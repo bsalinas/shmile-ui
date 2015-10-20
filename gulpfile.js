@@ -41,7 +41,7 @@ gulp.task('scripts', ['clean'], function() {
     .pipe(concat('shmile-ui.js'))
     .pipe(gulp.dest('build/js'))
     .pipe(sourcemaps.init())
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(sourcemaps.write("../maps"))
     .pipe(rename({extname: ".min.js"}))
     .pipe(gulp.dest('build/js'));
