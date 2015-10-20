@@ -186,7 +186,7 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
         console.log("onenterreview_composited");
 
         self.socket.emit('composite');
-        self.photoView.showOverlay(true);
+        // self.photoView.showOverlay(true);
         setTimeout(function() {
           self.fsm.next_set()
         }, self.config.next_delay);
